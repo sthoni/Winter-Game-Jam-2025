@@ -15,7 +15,7 @@ const MAX_JUMPS := 2
 @export var max_speed := 120.0
 @export var air_acceleration := 500.0
 @export var max_fall_speed := 250.0
-@export var dash_speed := 200.0
+@export var dash_speed := 300.0
 
 @export_category("Jump")
 @export_range(10.0, 200.0) var jump_height := 50.0
@@ -40,6 +40,8 @@ var jump_count := 0
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var dust: GPUParticles2D = %Dust
 @onready var coyote_timer := Timer.new()
+@onready var dash_timer := Timer.new()
+@onready var dash_cooldown_timer := Timer.new()
 
 # Primary jump calculations
 @onready var jump_speed := calculate_jump_speed(jump_height, jump_time_to_peak)
@@ -59,6 +61,10 @@ func _ready() -> void:
 	coyote_timer.wait_time = 0.1
 	coyote_timer.one_shot = true
 	add_child(coyote_timer)
+
+	dash_cooldown_timer.wait_time = 1.0
+	dash_cooldown_timer.one_shot = true
+	add_child(dash_cooldown_timer)
 
 
 func _physics_process(delta: float) -> void:
@@ -117,19 +123,18 @@ func process_ground_state(delta: float) -> void:
 	dust.emitting = is_moving
 
 	if Input.is_action_just_pressed("jump"):
-		DebugMenu.write_debug_message("Jump pressed")
 		_transition_to_state(PlayerState.JUMP)
-	elif Input.is_action_just_pressed("dash"):
-		DebugMenu.write_debug_message("Dash pressed")
+	elif Input.is_action_just_pressed("dash") and dash_cooldown_timer.is_stopped():
 		_transition_to_state(PlayerState.DASH)
 	elif not is_on_floor():
 		_transition_to_state(PlayerState.FALL)
 
 func process_dash_state(delta: float) -> void:
-	if direction_x != 0.0:
-		velocity.x += dash_speed * direction_x * delta
-		velocity.x = clampf(velocity.x, -dash_speed, dash_speed)
-		animated_sprite.flip_h = direction_x < 0.0
+	velocity.x = move_toward(velocity.x, 0.0, pow(deceleration * delta, 1))
+	if velocity.x == 0.0 and is_on_floor():
+		_transition_to_state(PlayerState.GROUND)
+	else:
+		_transition_to_state(PlayerState.FALL)
 
 
 func process_jump_state(delta: float) -> void:
@@ -143,10 +148,14 @@ func process_jump_state(delta: float) -> void:
 		if velocity.y < 0.0 and velocity.y < jump_cut_speed:
 			velocity.y = jump_cut_speed
 
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer.is_stopped():
+		_transition_to_state(PlayerState.DASH)
+
 	if velocity.y >= 0.0:
 		_transition_to_state(PlayerState.FALL)
 	elif Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS:
 		_transition_to_state(PlayerState.DOUBLE_JUMP)
+
 
 
 func process_double_jump_state(delta: float) -> void:
@@ -155,8 +164,12 @@ func process_double_jump_state(delta: float) -> void:
 		velocity.x = clampf(velocity.x, -jump_horizontal_speed, jump_horizontal_speed)
 		animated_sprite.flip_h = direction_x < 0.0
 
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer.is_stopped():
+		_transition_to_state(PlayerState.DASH)
+
 	if velocity.y >= 0.0:
 		_transition_to_state(PlayerState.FALL)
+
 
 
 func process_fall_state(delta: float) -> void:
@@ -164,6 +177,9 @@ func process_fall_state(delta: float) -> void:
 		velocity.x += air_acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -jump_horizontal_speed, jump_horizontal_speed)
 		animated_sprite.flip_h = direction_x < 0.0
+
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer.is_stopped():
+		_transition_to_state(PlayerState.DASH)
 
 	if Input.is_action_just_pressed("jump"):
 		if not coyote_timer.is_stopped():
@@ -179,6 +195,8 @@ func _transition_to_state(new_state: PlayerState) -> void:
 	var previous_state := current_state
 	current_state = new_state
 
+	DebugMenu.write_debug_message("Transitioned to state: %s from %s" % [new_state, previous_state])
+
 	match previous_state:
 		PlayerState.FALL:
 			coyote_timer.stop()
@@ -188,6 +206,14 @@ func _transition_to_state(new_state: PlayerState) -> void:
 			jump_count = 0
 			if previous_state == PlayerState.FALL:
 				play_tween_touch_ground()
+
+		PlayerState.DASH:
+			dash_cooldown_timer.start()
+			current_gravity = 0.0
+			velocity.x = direction_x * dash_speed
+			velocity.y = 0.0
+			animated_sprite.play("Dash")
+			dust.emitting = true
 
 		PlayerState.JUMP:
 			velocity.y = jump_speed

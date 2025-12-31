@@ -29,6 +29,14 @@ size = Vector2(14, 17)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("15_8n6cj")
+}],
+"loop": true,
+"name": &"Dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_p3y6h")
 }],
 "loop": true,
@@ -118,7 +126,7 @@ shape = SubResource("RectangleShape2D_d3nms")
 unique_name_in_owner = true
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_0vt5a")
-animation = &"Fall"
+animation = &"Dash"
 
 [node name="Dust" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true

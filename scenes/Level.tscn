@@ -29,6 +29,7 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_k5jlv")]
 position = Vector2(99, 274)
+dash_speed = 1500.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(320, 350)
