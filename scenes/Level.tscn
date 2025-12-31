@@ -1,27 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://cymg5sbxbh4nw"]
+[gd_scene load_steps=9 format=3 uid="uid://cymg5sbxbh4nw"]
 
 [ext_resource type="PackedScene" uid="uid://cid3qaobs3ypt" path="res://components/GameCamera.tscn" id="1_6vs76"]
 [ext_resource type="PackedScene" uid="uid://3pacq544ybt0" path="res://ui/PauseMenu.tscn" id="1_uhqny"]
 [ext_resource type="PackedScene" uid="uid://brnt563teispg" path="res://entities/Player/player.tscn" id="2_k5jlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vs76"]
-size = Vector2(193, 20)
+size = Vector2(640, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8ac"]
+size = Vector2(640, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qifjx"]
+size = Vector2(20, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dke22"]
+size = Vector2(20, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qegb"]
+size = Vector2(98, 20)
 
 [node name="Level" type="Node2D"]
 
 [node name="GameCamera" parent="." instance=ExtResource("1_6vs76")]
-position = Vector2(320, 182)
+position = Vector2(320, 180)
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_uhqny")]
 visible = false
 
+[node name="Player" parent="." instance=ExtResource("2_k5jlv")]
+position = Vector2(99, 274)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(56, 279)
+position = Vector2(320, 350)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(87, -1)
 shape = SubResource("RectangleShape2D_6vs76")
 
-[node name="Player" parent="." instance=ExtResource("2_k5jlv")]
-position = Vector2(82, 261)
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(320, 10)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_kl8ac")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(10, 30)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_qifjx")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(630, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_dke22")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(146, 305)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(39, 0)
+shape = SubResource("RectangleShape2D_4qegb")

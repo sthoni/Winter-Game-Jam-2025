@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 enum PlayerState {
 	GROUND,
+	DASH,
 	JUMP,
 	DOUBLE_JUMP,
 	FALL
@@ -14,6 +15,7 @@ const MAX_JUMPS := 2
 @export var max_speed := 120.0
 @export var air_acceleration := 500.0
 @export var max_fall_speed := 250.0
+@export var dash_speed := 200.0
 
 @export_category("Jump")
 @export_range(10.0, 200.0) var jump_height := 50.0
@@ -65,6 +67,8 @@ func _physics_process(delta: float) -> void:
 	match current_state:
 		PlayerState.GROUND:
 			process_ground_state(delta)
+		PlayerState.DASH:
+			process_dash_state(delta)
 		PlayerState.JUMP:
 			process_jump_state(delta)
 		PlayerState.FALL:
@@ -113,9 +117,19 @@ func process_ground_state(delta: float) -> void:
 	dust.emitting = is_moving
 
 	if Input.is_action_just_pressed("jump"):
+		DebugMenu.write_debug_message("Jump pressed")
 		_transition_to_state(PlayerState.JUMP)
+	elif Input.is_action_just_pressed("dash"):
+		DebugMenu.write_debug_message("Dash pressed")
+		_transition_to_state(PlayerState.DASH)
 	elif not is_on_floor():
 		_transition_to_state(PlayerState.FALL)
+
+func process_dash_state(delta: float) -> void:
+	if direction_x != 0.0:
+		velocity.x += dash_speed * direction_x * delta
+		velocity.x = clampf(velocity.x, -dash_speed, dash_speed)
+		animated_sprite.flip_h = direction_x < 0.0
 
 
 func process_jump_state(delta: float) -> void:

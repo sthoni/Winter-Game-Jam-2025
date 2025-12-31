@@ -1,18 +1,20 @@
-class_name DebugMenu extends CanvasLayer
+extends CanvasLayer
 
-@onready var DebugLabel: Label = %DebugLabel
+@onready var DebugLabel: RichTextLabel = %DebugLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalBus.connect("debug_message", _on_debug_message)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func _on_debug_message(message: String) -> void:
+
+func write_debug_message(message: String) -> void:
 	DebugLabel.text = message + "\n" + DebugLabel.text
 
-func _unhandled_key_input(event: InputEvent) -> void:
-	pass
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug"):
+		visible = !visible

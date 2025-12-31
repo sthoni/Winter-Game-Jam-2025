@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://sn7rphs2juvi"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://sn7rphs2juvi"]
+
+[ext_resource type="FontFile" uid="uid://cnte6wmem5bo2" path="res://assets/fonts/PixelOperator8.ttf" id="1_c8k34"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbat1"]
 content_margin_left = 8.0
@@ -36,6 +38,7 @@ corner_radius_bottom_left = 4
 bg_color = Color(0.101960786, 0, 0.4862745, 1)
 
 [resource]
+Button/fonts/font = ExtResource("1_c8k34")
 Button/styles/hover = SubResource("StyleBoxFlat_nbat1")
 Button/styles/normal = SubResource("StyleBoxFlat_c8k34")
 Button/styles/pressed = SubResource("StyleBoxFlat_t0710")
