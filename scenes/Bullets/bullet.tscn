@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnebj04yj45q7"]
+
+[ext_resource type="Script" uid="uid://cova4bch2pm2a" path="res://scenes/Bullets/bullet.gd" id="1_ccsf3"]
+[ext_resource type="Texture2D" uid="uid://cfn5j0pf6bf5w" path="res://assets/bullets/ice_gun.png" id="2_ccsf3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ewxj"]
+radius = 1.0
+height = 6.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_ccsf3")
+metadata/_custom_type_script = "uid://b6grch1ph8eke"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ccsf3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_8ewxj")

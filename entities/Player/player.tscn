@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://brnt563teispg"]
+[gd_scene load_steps=26 format=3 uid="uid://brnt563teispg"]
 
 [ext_resource type="Script" uid="uid://bd2qq63ri2pob" path="res://entities/Player/player.gd" id="1_0vt5a"]
 [ext_resource type="Texture2D" uid="uid://dkeb82jfc0mvd" path="res://assets/player/idle/004.png" id="2_d3nms"]
 [ext_resource type="Texture2D" uid="uid://w8wmt1j0car0" path="res://assets/player/fall.png" id="2_p3y6h"]
+[ext_resource type="PackedScene" uid="uid://tnqd55tn7rxh" path="res://components/WeaponComponent.tscn" id="2_s40jo"]
 [ext_resource type="Texture2D" uid="uid://cynx1gry2igcx" path="res://assets/player/idle/003.png" id="3_85j51"]
 [ext_resource type="Texture2D" uid="uid://ban7mor6v3cu" path="res://assets/player/idle/idle.png" id="4_aq80t"]
 [ext_resource type="Texture2D" uid="uid://df2oompm6ua01" path="res://assets/player/idle/000.png" id="5_4kjul"]
@@ -118,6 +119,10 @@ collision_layer = 2
 script = ExtResource("1_0vt5a")
 deceleration = 300.0
 
+[node name="WeaponComponent" parent="." instance=ExtResource("2_s40jo")]
+unique_name_in_owner = true
+position = Vector2(0, -9)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8.5)
 shape = SubResource("RectangleShape2D_d3nms")
@@ -132,6 +137,8 @@ animation = &"Dash"
 unique_name_in_owner = true
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("20_art7f")]
+collision_layer = 16
+collision_mask = 16
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -139,3 +146,4 @@ position = Vector2(0, -9.5)
 shape = SubResource("RectangleShape2D_mqdp1")
 
 [node name="HealthComponent" parent="." instance=ExtResource("21_s40jo")]
+unique_name_in_owner = true

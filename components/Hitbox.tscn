@@ -3,4 +3,6 @@
 [ext_resource type="Script" uid="uid://b6grch1ph8eke" path="res://components/hitbox.gd" id="1_shsls"]
 
 [node name="Hitbox" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
 script = ExtResource("1_shsls")

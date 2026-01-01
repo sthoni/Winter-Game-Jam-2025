@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cymg5sbxbh4nw"]
+[gd_scene load_steps=10 format=3 uid="uid://cymg5sbxbh4nw"]
 
 [ext_resource type="PackedScene" uid="uid://cid3qaobs3ypt" path="res://components/GameCamera.tscn" id="1_6vs76"]
+[ext_resource type="Script" uid="uid://c13vcxn3o616a" path="res://scenes/level.gd" id="1_qifjx"]
 [ext_resource type="PackedScene" uid="uid://3pacq544ybt0" path="res://ui/PauseMenu.tscn" id="1_uhqny"]
 [ext_resource type="PackedScene" uid="uid://brnt563teispg" path="res://entities/Player/player.tscn" id="2_k5jlv"]
 
@@ -20,6 +21,7 @@ size = Vector2(20, 320)
 size = Vector2(98, 20)
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_qifjx")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_6vs76")]
 position = Vector2(320, 180)
