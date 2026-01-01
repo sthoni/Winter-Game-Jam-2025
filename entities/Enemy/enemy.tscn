@@ -23,6 +23,7 @@ script = ExtResource("1_o2pt0")
 stats = ExtResource("2_4v0o4")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_gd0r0")]
+unique_name_in_owner = true
 collision_layer = 64
 collision_mask = 32
 damage = 200
@@ -48,6 +49,20 @@ unique_name_in_owner = true
 [node name="HealthComponent" parent="." instance=ExtResource("2_o2pt0")]
 unique_name_in_owner = true
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 12
+lifetime = 3.96
+lifetime_randomness = 0.21
+direction = Vector2(0, -1)
+spread = 6.03
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.62
+radial_accel_max = 8.25
+angle_max = 103.9
+scale_amount_min = 0.0
+color = Color(0.2509804, 0.11764706, 0.18431373, 1)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -8)
@@ -56,3 +71,18 @@ texture = ExtResource("4_gd0r0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -6.5)
 shape = SubResource("RectangleShape2D_g78mu")
+
+[node name="DeathParticle" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+emitting = false
+amount = 40
+lifetime = 0.09999999999999999
+one_shot = true
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 234.02
+angular_velocity_max = 60.83
+angle_max = 103.9
+scale_amount_max = 4.0
