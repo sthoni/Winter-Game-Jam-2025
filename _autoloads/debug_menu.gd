@@ -8,11 +8,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
-func write_debug_message(message: String) -> void:
+func log(message: String) -> void:
 	DebugLabel.text = message + "\n" + DebugLabel.text
 
 func _input(event: InputEvent) -> void:

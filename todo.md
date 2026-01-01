@@ -1,6 +1,6 @@
 # To-Do
 
-- [x] Dash einbauen
-- [ ] Waffen einbauen
+- [X] Dash einbauen
+- [X] Waffen einbauen
 - [ ] Gegner einbauen
 - [ ] Kleines Level basteln

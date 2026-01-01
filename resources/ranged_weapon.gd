@@ -7,7 +7,8 @@ class_name RangedWeapon extends Resource
 @export var fire_rate: float = 1.0
 @export var bullet_scene: PackedScene
 @export var bullet_speed: float = 1000.0
-@export var bullet_damage: int = 10
+@export var bullet_damage: int = 5
+@export var freeze_amount: float = 50.0
 
 func execute_attack(weapon: WeaponComponent) -> void:
     var bullet: Bullet = bullet_scene.instantiate()

@@ -11,6 +11,3 @@ var current_health: int:
 		emit_signal("health_changed", current_health)
 		if current_health <= 0:
 			emit_signal("health_depleted")
-
-func init_health(max_health: int) -> void:
-	current_health = max_health

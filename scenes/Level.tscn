@@ -1,23 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://cymg5sbxbh4nw"]
+[gd_scene load_steps=11 format=3 uid="uid://cymg5sbxbh4nw"]
 
 [ext_resource type="PackedScene" uid="uid://cid3qaobs3ypt" path="res://components/GameCamera.tscn" id="1_6vs76"]
 [ext_resource type="Script" uid="uid://c13vcxn3o616a" path="res://scenes/level.gd" id="1_qifjx"]
 [ext_resource type="PackedScene" uid="uid://3pacq544ybt0" path="res://ui/PauseMenu.tscn" id="1_uhqny"]
 [ext_resource type="PackedScene" uid="uid://brnt563teispg" path="res://entities/Player/player.tscn" id="2_k5jlv"]
 [ext_resource type="PackedScene" uid="uid://ciple3mg8n23l" path="res://entities/Enemy/enemy.tscn" id="5_qifjx"]
-[ext_resource type="Resource" uid="uid://btrxdq6tyaxos" path="res://resources/enemy_test_stats.tres" id="6_dke22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vs76"]
-size = Vector2(640, 20)
+size = Vector2(320, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8ac"]
-size = Vector2(640, 20)
+size = Vector2(320, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qifjx"]
-size = Vector2(20, 320)
+size = Vector2(10, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dke22"]
-size = Vector2(20, 320)
+size = Vector2(9, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qegb"]
 size = Vector2(98, 20)
@@ -26,20 +25,21 @@ size = Vector2(98, 20)
 script = ExtResource("1_qifjx")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_6vs76")]
-position = Vector2(320, 180)
+position = Vector2(160, 90)
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_uhqny")]
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_k5jlv")]
-position = Vector2(99, 274)
-dash_speed = 1500.0
+position = Vector2(72, 105)
+dash_speed = 600.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(320, 350)
+position = Vector2(320, 180)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-160, -5)
 shape = SubResource("RectangleShape2D_6vs76")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -47,6 +47,7 @@ position = Vector2(320, 10)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-160, -5)
 shape = SubResource("RectangleShape2D_kl8ac")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -54,23 +55,22 @@ position = Vector2(10, 30)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(0, 150)
+position = Vector2(-5, 60)
 shape = SubResource("RectangleShape2D_qifjx")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(630, 30)
+position = Vector2(310, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(0, 150)
+position = Vector2(5.5, 60)
 shape = SubResource("RectangleShape2D_dke22")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(146, 305)
+position = Vector2(118, 123)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2(39, 0)
 shape = SubResource("RectangleShape2D_4qegb")
 
 [node name="Enemy" parent="." instance=ExtResource("5_qifjx")]
-position = Vector2(338, 330)
-stats = ExtResource("6_dke22")
+position = Vector2(245, 156)

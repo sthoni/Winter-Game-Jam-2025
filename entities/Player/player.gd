@@ -47,6 +47,8 @@ var jump_count := 0
 
 @onready var weapon: WeaponComponent = %WeaponComponent
 @onready var health: HealthComponent = %HealthComponent
+@onready var hurtbox: Hurtbox = %Hurtbox
+@onready var dash_attack: DashAttack = %DashAttack
 
 # Primary jump calculations
 @onready var jump_speed := calculate_jump_speed(jump_height, jump_time_to_peak)
@@ -61,7 +63,7 @@ var jump_count := 0
 
 
 func _ready() -> void:
-	health.init_health(stats.max_health)
+	health.current_health = stats.max_health
 	health.health_depleted.connect(func() -> void: queue_free())
 	_transition_to_state(current_state)
 
@@ -152,6 +154,8 @@ func process_ground_state(delta: float) -> void:
 
 func process_dash_state(_delta: float) -> void:
 	if dash_timer.is_stopped():
+		hurtbox.monitorable = true
+		dash_attack.monitoring = false
 		if is_on_floor():
 			_transition_to_state(PlayerState.GROUND)
 		else:
@@ -213,7 +217,7 @@ func _transition_to_state(new_state: PlayerState) -> void:
 	var previous_state := current_state
 	current_state = new_state
 
-	DebugMenu.write_debug_message("Transitioned to state: %s from %s" % [new_state, previous_state])
+	DebugMenu.log("Transitioned to state: %s from %s" % [new_state, previous_state])
 
 	match previous_state:
 		PlayerState.FALL:
@@ -226,6 +230,8 @@ func _transition_to_state(new_state: PlayerState) -> void:
 				play_tween_touch_ground()
 
 		PlayerState.DASH:
+			hurtbox.monitorable = false
+			dash_attack.monitoring = true
 			dash_timer.start()
 			dash_cooldown_timer.start()
 			current_gravity = 0.0
@@ -233,7 +239,7 @@ func _transition_to_state(new_state: PlayerState) -> void:
 			velocity.y = 0.0
 			animated_sprite.play("Dash")
 			dust.emitting = true
-			SignalBus.emit_signal("camera_shake_requested", 0.1, 0.1)
+			SignalBus.emit_signal("camera_shake_requested", 0.3)
 
 		PlayerState.JUMP:
 			velocity.y = jump_speed

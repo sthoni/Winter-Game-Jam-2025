@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RangedWeapon" load_steps=4 format=3 uid="uid://d4d6gjk5cef52"]
 
-[ext_resource type="PackedScene" uid="uid://dnebj04yj45q7" path="res://scenes/Bullets/bullet.tscn" id="1_3vvhb"]
+[ext_resource type="PackedScene" uid="uid://dnebj04yj45q7" path="res://scenes/Hurtboxes/bullet.tscn" id="1_3vvhb"]
 [ext_resource type="Script" uid="uid://m2em75o5olw1" path="res://resources/ranged_weapon.gd" id="1_15ka4"]
 [ext_resource type="Texture2D" uid="uid://cfn5j0pf6bf5w" path="res://assets/bullets/ice_gun.png" id="3_qkxht"]
 
@@ -11,5 +11,5 @@ sprite = ExtResource("3_qkxht")
 fire_rate = 0.5
 bullet_scene = ExtResource("1_3vvhb")
 bullet_speed = 300.0
-bullet_damage = 5
+bullet_damage = 1
 metadata/_custom_type_script = "uid://m2em75o5olw1"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://brnt563teispg"]
+[gd_scene load_steps=28 format=3 uid="uid://brnt563teispg"]
 
 [ext_resource type="Script" uid="uid://bd2qq63ri2pob" path="res://entities/Player/player.gd" id="1_0vt5a"]
 [ext_resource type="Texture2D" uid="uid://dkeb82jfc0mvd" path="res://assets/player/idle/004.png" id="2_d3nms"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://4f1biql0ii4a" path="res://assets/player/run/005.png" id="17_s40jo"]
 [ext_resource type="PackedScene" uid="uid://dy4wrk0i4v75m" path="res://components/Hurtbox.tscn" id="20_art7f"]
 [ext_resource type="PackedScene" uid="uid://mvh67gamvh60" path="res://components/HealthComponent.tscn" id="21_s40jo"]
+[ext_resource type="PackedScene" uid="uid://cmhk0mlv5tlun" path="res://scenes/Hurtboxes/dash_attack.tscn" id="23_fjey7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3nms"]
 size = Vector2(14, 17)
@@ -139,13 +140,17 @@ animation = &"Dash"
 unique_name_in_owner = true
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("20_art7f")]
-collision_layer = 16
-collision_mask = 16
+unique_name_in_owner = true
+collision_layer = 32
+collision_mask = 0
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -9.5)
 shape = SubResource("RectangleShape2D_mqdp1")
+
+[node name="DashAttack" parent="." instance=ExtResource("23_fjey7")]
+unique_name_in_owner = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("21_s40jo")]
 unique_name_in_owner = true
