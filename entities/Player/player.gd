@@ -8,6 +8,8 @@ enum PlayerState {
 	FALL
 }
 
+@export var stats: CharacterStats
+
 const MAX_JUMPS := 2
 
 @export var acceleration := 700.0
@@ -59,7 +61,7 @@ var jump_count := 0
 
 
 func _ready() -> void:
-	health.init_health(10)
+	health.init_health(stats.max_health)
 	health.health_depleted.connect(func() -> void: queue_free())
 	_transition_to_state(current_state)
 

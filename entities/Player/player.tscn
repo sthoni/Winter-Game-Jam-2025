@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://brnt563teispg"]
+[gd_scene load_steps=27 format=3 uid="uid://brnt563teispg"]
 
 [ext_resource type="Script" uid="uid://bd2qq63ri2pob" path="res://entities/Player/player.gd" id="1_0vt5a"]
 [ext_resource type="Texture2D" uid="uid://dkeb82jfc0mvd" path="res://assets/player/idle/004.png" id="2_d3nms"]
+[ext_resource type="Resource" uid="uid://cubnmfe8pc6f7" path="res://resources/player_stats.tres" id="2_mqdp1"]
 [ext_resource type="Texture2D" uid="uid://w8wmt1j0car0" path="res://assets/player/fall.png" id="2_p3y6h"]
 [ext_resource type="PackedScene" uid="uid://tnqd55tn7rxh" path="res://components/WeaponComponent.tscn" id="2_s40jo"]
 [ext_resource type="Texture2D" uid="uid://cynx1gry2igcx" path="res://assets/player/idle/003.png" id="3_85j51"]
@@ -117,6 +118,7 @@ size = Vector2(12, 19)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_0vt5a")
+stats = ExtResource("2_mqdp1")
 deceleration = 300.0
 
 [node name="WeaponComponent" parent="." instance=ExtResource("2_s40jo")]

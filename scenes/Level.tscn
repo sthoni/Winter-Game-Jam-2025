@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cymg5sbxbh4nw"]
+[gd_scene load_steps=12 format=3 uid="uid://cymg5sbxbh4nw"]
 
 [ext_resource type="PackedScene" uid="uid://cid3qaobs3ypt" path="res://components/GameCamera.tscn" id="1_6vs76"]
 [ext_resource type="Script" uid="uid://c13vcxn3o616a" path="res://scenes/level.gd" id="1_qifjx"]
 [ext_resource type="PackedScene" uid="uid://3pacq544ybt0" path="res://ui/PauseMenu.tscn" id="1_uhqny"]
 [ext_resource type="PackedScene" uid="uid://brnt563teispg" path="res://entities/Player/player.tscn" id="2_k5jlv"]
+[ext_resource type="PackedScene" uid="uid://ciple3mg8n23l" path="res://entities/Enemy/enemy.tscn" id="5_qifjx"]
+[ext_resource type="Resource" uid="uid://btrxdq6tyaxos" path="res://resources/enemy_test_stats.tres" id="6_dke22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vs76"]
 size = Vector2(640, 20)
@@ -68,3 +70,7 @@ position = Vector2(146, 305)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2(39, 0)
 shape = SubResource("RectangleShape2D_4qegb")
+
+[node name="Enemy" parent="." instance=ExtResource("5_qifjx")]
+position = Vector2(338, 330)
+stats = ExtResource("6_dke22")
