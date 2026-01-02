@@ -240,6 +240,7 @@ func _transition_to_state(new_state: PlayerState) -> void:
 			animated_sprite.play("Dash")
 			dust.emitting = true
 			SignalBus.emit_signal("camera_shake_requested", 0.3)
+			SoundManager.play_sfx(AudioStreamWAV.load_from_file("assets/sfx/dash.wav"), 0.2)
 
 		PlayerState.JUMP:
 			velocity.y = jump_speed
@@ -249,6 +250,7 @@ func _transition_to_state(new_state: PlayerState) -> void:
 			jump_count = 1
 			play_tween_jump()
 			dust.emitting = true
+			SoundManager.play_sfx(AudioStreamWAV.load_from_file("assets/sfx/jump.wav"), 0.2)
 
 		PlayerState.DOUBLE_JUMP:
 			velocity.y = double_jump_speed
@@ -258,6 +260,7 @@ func _transition_to_state(new_state: PlayerState) -> void:
 			jump_count = MAX_JUMPS
 			play_tween_jump()
 			dust.emitting = true
+			SoundManager.play_sfx(AudioStreamWAV.load_from_file("assets/sfx/double_jump.wav"), 0.2)
 
 		PlayerState.FALL:
 			animated_sprite.play("Fall")

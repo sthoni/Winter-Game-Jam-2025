@@ -20,7 +20,6 @@ func _ready() -> void:
 		if frozen:
 			modulate = Color(0, 1.0, 1.0, 1.0)
 			hitbox.monitoring = false
-
 	)
 
 
@@ -31,5 +30,6 @@ func _physics_process(delta: float) -> void:
 
 
 func die() -> void:
+	SoundManager.play_sfx(AudioStreamWAV.load_from_file("assets/sfx/explosion.wav"), 0.2)
 	death_particle.emitting = true
 	death_particle.finished.connect(func() -> void: queue_free())

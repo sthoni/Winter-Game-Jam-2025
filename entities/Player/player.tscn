@@ -25,9 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://mvh67gamvh60" path="res://components/HealthComponent.tscn" id="21_s40jo"]
 [ext_resource type="PackedScene" uid="uid://cmhk0mlv5tlun" path="res://scenes/Hurtboxes/dash_attack.tscn" id="23_fjey7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3nms"]
-size = Vector2(14, 17)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_0vt5a"]
 animations = [{
 "frames": [{
@@ -113,6 +110,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3nms"]
+size = Vector2(14, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqdp1"]
 size = Vector2(12, 19)
 
@@ -126,21 +126,22 @@ deceleration = 300.0
 unique_name_in_owner = true
 position = Vector2(0, -9)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8.5)
-shape = SubResource("RectangleShape2D_d3nms")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_0vt5a")
-animation = &"Dash"
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_d3nms")
 
 [node name="Dust" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("20_art7f")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 32
 collision_mask = 0
 health_component = NodePath("../HealthComponent")
