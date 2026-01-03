@@ -9,7 +9,6 @@ class_name Enemy extends CharacterBody2D
 @onready var hitbox: Hitbox = %Hitbox
 
 @export var max_fall_speed := 250.0
-var current_gravity := 20.0
 var is_frozen := false
 
 func _ready() -> void:
@@ -18,14 +17,21 @@ func _ready() -> void:
 	freeze.current_heat = stats.max_heat
 	freeze.freeze_state_changed.connect(func(frozen: bool) -> void:
 		if frozen:
+			is_frozen = true
 			modulate = Color(0, 1.0, 1.0, 1.0)
 			hitbox.monitoring = false
 	)
 
 
 func _physics_process(delta: float) -> void:
-	velocity.y += current_gravity * delta
-	velocity.y = minf(velocity.y, max_fall_speed)
+	if is_frozen:
+		velocity.y = 100.0
+		velocity.x = 0.0
+	else:
+		var player: Player = get_tree().get_nodes_in_group("Player")[0]
+		var direction := player.position - position
+		direction = direction.normalized()
+		velocity = direction * 50.0
 	move_and_slide()
 
 
