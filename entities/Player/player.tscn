@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://brnt563teispg"]
+[gd_scene load_steps=31 format=3 uid="uid://brnt563teispg"]
 
 [ext_resource type="Script" uid="uid://bd2qq63ri2pob" path="res://entities/Player/player.gd" id="1_0vt5a"]
 [ext_resource type="Resource" uid="uid://cubnmfe8pc6f7" path="res://resources/player_stats.tres" id="2_mqdp1"]
@@ -137,6 +137,28 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3nms"]
 size = Vector2(10, 11)
 
+[sub_resource type="Gradient" id="Gradient_xbwyr"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_en1of"]
+gradient = SubResource("Gradient_xbwyr")
+
+[sub_resource type="Curve" id="Curve_xbwyr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_en1of"]
+curve = SubResource("Curve_xbwyr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xbwyr"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -8, 0)
+scale_curve = SubResource("CurveTexture_en1of")
+color_ramp = SubResource("GradientTexture1D_en1of")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqdp1"]
 size = Vector2(10, 10)
 
@@ -160,15 +182,18 @@ sprite_frames = SubResource("SpriteFrames_aq80t")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_d3nms")
 
 [node name="Dust" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
-visible = false
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_xbwyr")
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("20_art7f")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 32
 collision_mask = 0
 health_component = NodePath("../HealthComponent")
@@ -179,7 +204,9 @@ shape = SubResource("RectangleShape2D_mqdp1")
 
 [node name="DashAttack" parent="." instance=ExtResource("23_fjey7")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -8)
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashAttack"]
 position = Vector2(0, 2)

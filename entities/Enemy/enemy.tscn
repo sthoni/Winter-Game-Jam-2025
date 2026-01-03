@@ -17,13 +17,15 @@ size = Vector2(13, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g78mu"]
 size = Vector2(9, 13)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_o2pt0")
 stats = ExtResource("2_4v0o4")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_gd0r0")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 64
 collision_mask = 32
 damage = 200
@@ -34,6 +36,7 @@ position = Vector2(-0.5, -6.5)
 shape = SubResource("RectangleShape2D_b6rq0")
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component", "freeze_component") instance=ExtResource("1_mwd7m")]
+visible = false
 collision_layer = 128
 collision_mask = 0
 health_component = NodePath("../HealthComponent")
@@ -68,6 +71,7 @@ position = Vector2(0, -8)
 texture = ExtResource("4_gd0r0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, -6.5)
 shape = SubResource("RectangleShape2D_g78mu")
 

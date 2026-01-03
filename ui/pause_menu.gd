@@ -10,7 +10,7 @@ func _ready() -> void:
 		hide()
 	)
 	quit_button.pressed.connect(func() -> void:
-		GameManager.quit_game()
+		GameManager.reload_scene()
 	)
 
 func pause_game() -> void:

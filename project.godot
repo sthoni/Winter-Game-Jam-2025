@@ -15,12 +15,16 @@ run/main_scene="uid://c5kaix1e8owld"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 DebugMenu="*res://_autoloads/DebugMenu.tscn"
 SoundManager="*res://_autoloads/SoundManager.tscn"
-GameManager="*res://_autoloads/GameManager.gd"
 SignalBus="*res://_autoloads/SignalBus.gd"
+GameManager="*res://_autoloads/GameManager.gd"
 
 [debug]
 
@@ -34,6 +38,7 @@ window/size/viewport_width=320
 window/size/viewport_height=180
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
@@ -42,6 +47,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 [global_group]
 
 Player=""
+Enemies=""
 
 [gui]
 

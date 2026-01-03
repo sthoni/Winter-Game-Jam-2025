@@ -20,6 +20,10 @@ func _ready() -> void:
 			is_frozen = true
 			modulate = Color(0, 1.0, 1.0, 1.0)
 			hitbox.monitoring = false
+		else:
+			is_frozen = false
+			modulate = Color(1.0, 1.0, 1.0, 1.0)
+			hitbox.monitoring = true
 	)
 
 
@@ -28,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 100.0
 		velocity.x = 0.0
 	else:
-		var player: Player = get_tree().get_nodes_in_group("Player")[0]
+		var player: Player = get_tree().get_first_node_in_group("Player")
 		var direction := player.position - position
 		direction = direction.normalized()
 		velocity = direction * 50.0
@@ -36,6 +40,7 @@ func _physics_process(delta: float) -> void:
 
 
 func die() -> void:
-	SoundManager.play_sfx(AudioStreamWAV.load_from_file("assets/sfx/explosion.wav"), 0.2)
+	SoundManager.play_sfx(load("res://assets/sfx/explosion.wav"), 0.2)
 	death_particle.emitting = true
+	SignalBus.enemy_killed.emit()
 	death_particle.finished.connect(func() -> void: queue_free())

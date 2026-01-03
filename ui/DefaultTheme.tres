@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://sn7rphs2juvi"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://sn7rphs2juvi"]
 
 [ext_resource type="FontFile" uid="uid://cnte6wmem5bo2" path="res://assets/fonts/PixelOperator8.ttf" id="1_c8k34"]
+[ext_resource type="Texture2D" uid="uid://dm3ggyd404kb0" path="res://assets/player/background.png" id="2_t0710"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbat1"]
 content_margin_left = 8.0
@@ -34,8 +35,8 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3r0c"]
-bg_color = Color(0.101960786, 0, 0.4862745, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3r0c"]
+texture = ExtResource("2_t0710")
 
 [resource]
 Button/fonts/font = ExtResource("1_c8k34")
@@ -47,5 +48,5 @@ MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 16
-Panel/styles/panel = SubResource("StyleBoxFlat_d3r0c")
+Panel/styles/panel = SubResource("StyleBoxTexture_d3r0c")
 VBoxContainer/constants/separation = 16

@@ -2,7 +2,6 @@ class_name WeaponComponent extends Node2D
 
 @export var current_weapon: RangedWeapon
 
-@onready var sprite: Sprite2D = %Sprite
 @onready var nozzle: Marker2D = %Nozzle
 @onready var cooldown_timer: Timer = Timer.new()
 
