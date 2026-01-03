@@ -36,3 +36,7 @@ func change_scene(scene_path: String) -> void:
 
 func quit_game() -> void:
 	get_tree().quit()
+
+
+func reload_scene() -> void:
+	get_tree().reload_current_scene()

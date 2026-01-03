@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://cymg5sbxbh4nw"]
+[gd_scene load_steps=10 format=4 uid="uid://cymg5sbxbh4nw"]
 
 [ext_resource type="PackedScene" uid="uid://cid3qaobs3ypt" path="res://components/GameCamera.tscn" id="1_6vs76"]
 [ext_resource type="Script" uid="uid://c13vcxn3o616a" path="res://scenes/level.gd" id="1_qifjx"]
 [ext_resource type="PackedScene" uid="uid://3pacq544ybt0" path="res://ui/PauseMenu.tscn" id="1_uhqny"]
+[ext_resource type="Texture2D" uid="uid://dm3ggyd404kb0" path="res://assets/player/background.png" id="2_4qegb"]
 [ext_resource type="PackedScene" uid="uid://brnt563teispg" path="res://entities/Player/player.tscn" id="2_k5jlv"]
 [ext_resource type="PackedScene" uid="uid://ciple3mg8n23l" path="res://entities/Enemy/enemy.tscn" id="5_qifjx"]
 [ext_resource type="Texture2D" uid="uid://bxddw3jt7vic8" path="res://assets/level/tileset.png" id="6_dke22"]
@@ -96,6 +97,10 @@ sources/0 = SubResource("TileSetAtlasSource_4qegb")
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qifjx")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(161, 91)
+texture = ExtResource("2_4qegb")
+
 [node name="GameCamera" parent="." instance=ExtResource("1_6vs76")]
 position = Vector2(160, 90)
 
@@ -103,7 +108,7 @@ position = Vector2(160, 90)
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_k5jlv")]
-position = Vector2(72, 105)
+position = Vector2(118, 174)
 dash_speed = 600.0
 
 [node name="Enemy" parent="." instance=ExtResource("5_qifjx")]

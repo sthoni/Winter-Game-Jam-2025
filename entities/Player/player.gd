@@ -64,7 +64,7 @@ var jump_count := 0
 
 func _ready() -> void:
 	health.current_health = stats.max_health
-	health.health_depleted.connect(func() -> void: queue_free())
+	health.health_depleted.connect(func() -> void: GameManager.reload_scene())
 	_transition_to_state(current_state)
 
 	coyote_timer.wait_time = 0.1
@@ -86,10 +86,8 @@ func _physics_process(delta: float) -> void:
 	# HACK: Damit sorge ich dafür, dass in die korrekte Richtung geschossen wird
 	if direction_x > 0:
 		weapon.rotation = 0
-		weapon.sprite.flip_v = false
 	elif direction_x < 0:
 		weapon.rotation = PI
-		weapon.sprite.flip_v = true
 	if Input.is_action_pressed("attack"):
 		weapon.try_attack()
 
